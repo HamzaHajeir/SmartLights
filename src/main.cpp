@@ -39,8 +39,8 @@ void onGlobalsChange(const std::string &svc, H4PE_TYPE t, const std::string &val
 void onMQTTConnect();
 
 H4P_PinMachine h4pm;
-H4P_WiFi h4wifi("SSID","PASSWORD");
-H4P_AsyncMQTT h4mqtt("http://192.168.1.4:1883");
+H4P_WiFi h4wifi;
+H4P_AsyncMQTT h4mqtt;
 h4pTactless myButton(buttonPin, INPUT_PULLUP, ACTIVE_LOW, /*Debounce time (ms)=*/ 20);
 
 void h4pGlobalEventHandler(const std::string &svc, H4PE_TYPE t, const std::string &msg)
