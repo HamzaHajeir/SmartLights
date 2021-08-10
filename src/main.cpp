@@ -87,7 +87,17 @@ void h4UserLoop()
     visualLEDsLoop();
 }
 
+void validateRegisty()
+{
+    if (!h4p.gvExists("palette"))
+        h4p.gvSetInt("palette", 1, true);
 
+    int paletteNo = h4p.gvGetInt("palette");
+    if (paletteNo < 0 || paletteNo >= cThemeVec.size())
+    {
+        h4p.gvSetInt("palette", 1, true);
+    }
+}
 void visualLEDsSetup()
 {
     cThemeVec.push_back(std::make_pair<CRGBPalette16, TBlendType>(SetupBlackStriped(), LINEARBLEND));
@@ -108,8 +118,7 @@ void visualLEDsSetup()
     h4.every(50, //call below void function every 15 ms
              visualLEDsLoop);
 
-    if (!h4p.gvExists("palette"))
-        h4p.gvSetInt("palette", 1, true);
+    validateRegisty();
     h4mqtt.publishDevice("debug", "setup");
     updatePalette();
     h4mqtt.publishDevice("debug", "pallete selected");
